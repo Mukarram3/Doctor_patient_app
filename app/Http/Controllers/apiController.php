@@ -2,15 +2,38 @@
 namespace App\Http\Controllers\API;
 namespace App\Http\Controllers;
 use App\Models\User;
-use App\Http\Controllers\Controller;
+use App\Models\doctor;
 use App\Models\comment;
+use App\Models\category;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-use App\Models\category;
-use App\Models\doctor;
+use App\Notifications\testnotification;
+use Illuminate\Support\Facades\Notification;
+
 class apiController extends Controller
 {
+
+    public function notifications(Request $request){
+
+        // return $request;
+
+        $doctor=doctor::where('email','=',$request->email)->first();
+
+        // return $doctor;
+
+        $enrollmentdata = [
+            'body' => 'you received new notification',
+            'enrollmenttext' => 'you are allowed to enroll',
+            'url' => url('/'),
+            'thankyou' => 'you have 14 days to enroll'
+        ];
+
+        Notification::send($doctor,new testnotification($enrollmentdata));
+
+    }
+
 
     function comments(Request $request){
 

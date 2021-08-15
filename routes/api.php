@@ -35,4 +35,11 @@ Route::group(['middleware' => 'auth:api'], function(){
     Route::post('comments',[apiController::class,'comments']);
 
 
+    //              Push Notification routes
+
+Route::get('notifications',[apiController::class,'notifications']);
+
+//              Push Notification routes
+
+
 ?>

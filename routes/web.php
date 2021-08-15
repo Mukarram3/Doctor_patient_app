@@ -1,10 +1,15 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\DoctorController;
+use App\Http\Controllers\DoctornotificationController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\StripeController;
 use App\Http\Controllers\ForgotPasswordController;
+use App\Mail\emails;
+use App\Notifications\doctorNotification;
+use Illuminate\Support\Facades\Mail;
 
 /*
 |--------------------------------------------------------------------------
@@ -71,3 +76,17 @@ Route::post('/stripe-payment', [StripeController::class, 'handlePost'])->name('s
 
 
 //                      Payment Gateway routes end
+
+
+
+
+//              Send emails
+
+Route::get('sendemails',function(){
+
+    Mail::to('csheikh271@gmail.com')->send(new emails());
+
+
+});
+
+//              Send emails
